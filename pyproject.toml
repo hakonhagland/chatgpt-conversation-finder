@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "chatgpt-conversation-finder"
+version = "0.1.0"
+description = ""
+authors = ["Håkon Hægland <hakon.hagland@gmail.com>"]
+readme = "README.md"
+packages = [{include = "chatgpt_conversation_finder", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+click = "^8.1.7"
+pyqt6 = "^6.6.1"
+platformdirs = "^4.2.0"
+sphinx-click-rst-to-ansi-formatter = "^0.1.0"
+nltk = "^3.8.1"
+
+[tool.poetry.scripts]
+chatgpt-conversation-finder-cli = "chatgpt_conversation_finder.main:cli"
+chatgpt-conversation-finder = "chatgpt_conversation_finder.main:guicmd"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
