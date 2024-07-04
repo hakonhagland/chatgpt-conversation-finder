@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "chatgpt_conversation_finder", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.11,<4.0"
 click = "^8.1.7"
 pyqt6 = "^6.6.1"
 platformdirs = "^4.2.0"
