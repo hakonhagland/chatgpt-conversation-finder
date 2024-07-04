@@ -1,4 +1,5 @@
 import logging
+import shutil
 from pathlib import Path
 from typing import Callable
 
@@ -9,7 +10,7 @@ from click.testing import CliRunner
 from pytest_mock.plugin import MockerFixture
 
 import chatgpt_conversation_finder.main as main
-from .common import QtBot
+from .common import PrepareConfigDir, QtBot
 
 
 class TestGuiCmd:
@@ -197,16 +198,61 @@ class TestUpdateData:
     def test_invoke_no_filename(
         self,
         caplog: LogCaptureFixture,
+        capsys: pytest.CaptureFixture[str],
         mocker: MockerFixture,
         monkeypatch: pytest.MonkeyPatch,
         data_dir_path: Path,
-        config_dir_path: Path,
+        prepare_config_dir: PrepareConfigDir,
         tmp_path: Path,
-        chats_zip_path: Path,
         qapp: QApplication,
     ) -> None:
         caplog.set_level(logging.INFO)
-        config_dir = config_dir_path
+        downloads_dir = tmp_path / "Downloads"
+        downloads_dir.mkdir()
+        config_dir = prepare_config_dir(
+            add_config_ini=True, downloads_dir=downloads_dir
+        )
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        data_dir = data_dir_path
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        mocker.patch(
+            "chatgpt_conversation_finder.main.QApplication",
+            return_value=qapp,
+        )
+        runner = CliRunner()
+        args = ["update-data"]
+        with runner.isolated_filesystem(temp_dir=tmp_path):  # type: ignore
+            result = runner.invoke(main.main, args)
+        assert result.exit_code == 0
+        assert caplog.records[-1].msg.startswith("No file selected")
+
+    def test_invoke_no_filename_select(
+        self,
+        caplog: LogCaptureFixture,
+        capsys: pytest.CaptureFixture[str],
+        mocker: MockerFixture,
+        monkeypatch: pytest.MonkeyPatch,
+        data_dir_path: Path,
+        prepare_config_dir: PrepareConfigDir,
+        tmp_path: Path,
+        qapp: QApplication,
+        chats_zip_path: Path,
+    ) -> None:
+        caplog.set_level(logging.INFO)
+        downloads_dir = tmp_path / "Downloads"
+        downloads_dir.mkdir()
+        zip_filename = chats_zip_path.name
+        zip_path = downloads_dir / zip_filename
+        shutil.copy(chats_zip_path, zip_path)
+        config_dir = prepare_config_dir(
+            add_config_ini=True, downloads_dir=downloads_dir
+        )
         mocker.patch(
             "platformdirs.user_config_dir",
             return_value=config_dir,
@@ -222,12 +268,11 @@ class TestUpdateData:
         )
 
         def mock_exec(dialog: QFileDialog) -> QFileDialog.DialogCode:
-            dialog.selectFile(str(chats_zip_path))
-            dialog.selectedFiles = lambda: [str(chats_zip_path)]  # type: ignore
-            logging.info(f"Mocked selectedFiles: {dialog.selectedFiles()}")
+            dialog.selectedFiles = lambda: [str(zip_path)]  # type: ignore
             return QFileDialog.DialogCode.Accepted
 
         monkeypatch.setattr(QFileDialog, "exec", mock_exec)
+
         runner = CliRunner()
         args = ["update-data"]
         with runner.isolated_filesystem(temp_dir=tmp_path):  # type: ignore

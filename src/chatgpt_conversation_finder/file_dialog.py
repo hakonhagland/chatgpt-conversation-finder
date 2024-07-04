@@ -18,7 +18,6 @@ class FileDialog:
 
     def select_zip_file(self) -> str | None:
         # List all zip files in the folder sorted by modification time
-        logging.info("Selecting zip file...")
         try:
             files = [f for f in os.listdir(self.folder_path) if f.endswith(".zip")]
             files.sort(
@@ -28,8 +27,6 @@ class FileDialog:
         except FileNotFoundError:
             print(f"The specified folder {self.folder_path} does not exist")
             return None
-
-        logging.info(f"files = {files}")
         if not files:
             print(f"No zip files found in folder {self.folder_path}")
             return None
@@ -46,15 +43,12 @@ class FileDialog:
         dialog.selectFile(
             os.path.join(self.folder_path, files[0])
         )  # Select the most recently modified zip file by default
-        logging.info("Calling exec()")
 
         # Show the dialog and get the selected file
         if dialog.exec() == QFileDialog.DialogCode.Accepted:
-            logging.info(f"Selected file x: {dialog.selectedFiles()[0]}")
             return dialog.selectedFiles()[0]
         else:
             print("Cancelled file selection.")
-            logging.info("Cancelled file selection. Returning None.")
             return None
 
     def get_conversations_json_path(self) -> str | None:

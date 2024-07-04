@@ -101,6 +101,9 @@ def update_data(filename: str) -> None:
     if filename is None:
         app = QApplication(sys.argv)
         filename = FileDialog(app, config).get_conversations_json_path()
+        if filename is None:
+            logging.error("No file selected")
+            return
         logging.info(f"filename = {filename}")
     Helpers.extract_conversations_json_file(config.get_data_dir(), filename)
     logging.info("Creating search index...")

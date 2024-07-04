@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
 
+import platformdirs
 import pytest
 from pytest_mock.plugin import MockerFixture
 
@@ -231,3 +232,25 @@ class TestConfigFile:
         assert re.search(
             r"Config filename \S+ exists, but filetype is not file", str(excinfo)
         )
+
+    def test_config_file_default_downloads_dir(
+        self,
+        mocker: MockerFixture,
+        data_dir_path: Path,
+        prepare_config_dir: PrepareConfigDir,
+    ) -> None:
+        data_dir = data_dir_path
+        config_dir = prepare_config_dir(
+            add_config_ini=True, downloads_dir=Path("_USER_DOWNLOAD_DIR_")
+        )
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        config = Config()
+        downloads_dir = config.get_filedialog_default_dir()
+        assert downloads_dir == platformdirs.user_downloads_dir()
