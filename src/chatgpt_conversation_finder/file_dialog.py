@@ -18,6 +18,7 @@ class FileDialog:
 
     def select_zip_file(self) -> str | None:
         # List all zip files in the folder sorted by modification time
+        logging.info("Selecting zip file...")
         try:
             files = [f for f in os.listdir(self.folder_path) if f.endswith(".zip")]
             files.sort(
@@ -28,6 +29,7 @@ class FileDialog:
             print(f"The specified folder {self.folder_path} does not exist")
             return None
 
+        logging.info(f"files = {files}")
         if not files:
             print(f"No zip files found in folder {self.folder_path}")
             return None
