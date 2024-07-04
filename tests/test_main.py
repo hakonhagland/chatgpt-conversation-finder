@@ -222,7 +222,9 @@ class TestUpdateData:
         )
 
         def mock_exec(dialog: QFileDialog) -> QFileDialog.DialogCode:
-            dialog.selectedFiles = lambda: [chats_zip_path]  # type: ignore
+            dialog.selectFile(str(chats_zip_path))
+            dialog.selectedFiles = lambda: [str(chats_zip_path)]  # type: ignore
+            logging.info(f"Mocked selectedFiles: {dialog.selectedFiles()}")
             return QFileDialog.DialogCode.Accepted
 
         monkeypatch.setattr(QFileDialog, "exec", mock_exec)
