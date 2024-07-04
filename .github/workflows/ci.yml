@@ -33,9 +33,11 @@ jobs:
         run: poetry run python -m mypy --strict src/ tests/
 
       - name: Code coverage
-        run: |
-            poetry run coverage run -m pytest tests
-            poetry run coverage xml
+        uses: aganders3/headless-gui@v1
+        with:
+            run: |
+                poetry run coverage run -m pytest tests
+                poetry run coverage xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
