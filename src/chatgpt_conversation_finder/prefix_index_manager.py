@@ -3,6 +3,7 @@ import logging
 
 from chatgpt_conversation_finder.config import Config
 
+
 class PrefixIndexManager:
     """Manages the prefix search index for the conversations.
 
@@ -19,12 +20,13 @@ class PrefixIndexManager:
     IDEA: We only need, say the first 3 characters of each word, to build the prefix index.
     Once, the user type the 4th
     """
+
     def __init__(
         self,
         config: Config,
         conversations: dict[str, set[str]],
         id_map: dict[str, int],
-        init_type: str = "load"  # "load" or "create"
+        init_type: str = "load",  # "load" or "create"
     ) -> None:
         """
         :param config: Config object
@@ -51,7 +53,7 @@ class PrefixIndexManager:
         The maximum length of the prefix is determined by self.max_prefix_length.
         A longer length will result in a larger index but faster search times.
         """
-        prefix_index = {}
+        prefix_index: dict[str, set[str]] = {}
         for id, content in self.conversations.items():
             for token in content:
                 for j in range(1, self.max_prefix_length + 1):
@@ -60,7 +62,7 @@ class PrefixIndexManager:
                     prefix = token[:j]
                     if prefix not in prefix_index:
                         prefix_index[prefix] = set()
-                    prefix_index[prefix].add(self.id_map[id])
+                    prefix_index[prefix].add(str(self.id_map[id]))
         self.save_prefix_index(prefix_index)
         return prefix_index
 
@@ -71,14 +73,16 @@ class PrefixIndexManager:
         """Load prefix index from disk or generate it if it does not exist"""
         prefix_index_path = self.config.get_prefix_index_path()
         try:
-            with open(prefix_index_path, 'r', encoding='utf-8') as f:
+            with open(prefix_index_path, "r", encoding="utf-8") as f:
                 prefix_index = json.load(f)
                 prefix_index = {k: set(v) for k, v in prefix_index.items()}
             logging.info(f"Prefix index loaded from {prefix_index_path}")
         except FileNotFoundError:
-            logging.warning(f"Prefix index file not found at {prefix_index_path}. Creating a new prefix index.")
+            logging.warning(
+                f"Prefix index file not found at {prefix_index_path}. Creating a new prefix index."
+            )
             prefix_index = self.create_search_index()
-        return prefix_index
+        return prefix_index  # type: ignore
 
     def match_prefix(self, prefix: str) -> set[str]:
         """Match a prefix to the set of matching conversations."""
@@ -88,7 +92,7 @@ class PrefixIndexManager:
         prefix_index_path = self.config.get_prefix_index_path()
         # We need to convert the prefix index to a dictionary with lists
         # because json does not support sets
-        prefix_index = {k: list(v) for k, v in prefix_index.items()}
-        with open(prefix_index_path, 'w', encoding='utf-8') as f:
-            json.dump(prefix_index, f, indent=4, sort_keys=True)
+        prefix_index_converted = {k: list(v) for k, v in prefix_index.items()}
+        with open(prefix_index_path, "w", encoding="utf-8") as f:
+            json.dump(prefix_index_converted, f, indent=4, sort_keys=True)
         logging.info(f"Prefix index saved to {prefix_index_path}")

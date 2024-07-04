@@ -16,30 +16,25 @@ from chatgpt_conversation_finder.index_manager import IndexManager
 from chatgpt_conversation_finder.validate_conversations import ValidateConversations
 
 # Set the locale to the user's default setting
-locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, "")
 # Set the documentation URL for make_rst_to_ansi_formatter()
-doc_url = "https://example.com/"
+doc_url = "https://hakonhagland.github.io/chatgpt-conversation-finder/main/index.html"
 
-
-@click.command()
-@click.argument('search_term', type=str, required=True)
-def cli(search_term):
-    config = Config()
-    chats_json_handler = ChatsJsonHandler(config)
-    matches = chats_json_handler.search_conversations(search_term)
-    for match in matches:
-        print(f"Title: {match['title']}, ID: {match['id']}, "
-              f"Created: {Helpers.format_create_time(match['create_time'])}")
 
 @click.group(cls=make_rst_to_ansi_formatter(doc_url, group=True))
 @click.option("--verbose", "-v", is_flag=True, help="Show verbose output")
 @click.pass_context
-def guicmd(ctx: click.Context, verbose: bool) -> None:
+def main(ctx: click.Context, verbose: bool) -> None:
     """``chatgpt-conversation-finder`` is a simple Qt app that let's you open a
-    ChatGPT conversation in your default web browser. It has two sub commands:
+    ChatGPT conversation in your default web browser. It has the following sub commands:
 
-    * ``gui``: opens the GUI, and
-    * ``update-data``: updates the conversation.json data file from a downloaded chat data file in .zip format from OpenAI website."""
+    * ``create-search-index``: generates a search index for the conversations.json file.
+    * ``extract-conversations``: extracts conversations from the ``conversations.json`` file.
+    * ``gui``: opens a GUI for searching conversations. Let's you open a conversation in your default web browser.
+    * ``pretty-print``: pretty prints the ``conversations.json`` file to stdout.
+    * ``search-term``: searches the ``conversations.json`` file for all conversations matching the given search term.
+    * ``update-data``: updates the ``conversations.json`` data file from a downloaded chat data file in .zip format from OpenAI website.
+    * ``validate-conversations``: validates the ``conversations.json`` file."""
 
     ctx.ensure_object(dict)
     ctx.obj["VERBOSE"] = verbose
@@ -47,9 +42,24 @@ def guicmd(ctx: click.Context, verbose: bool) -> None:
         logging.basicConfig(level=logging.DEBUG)
     else:
         logging.basicConfig(level=logging.INFO)
-        #logging.basicConfig(level=logging.WARNING)
+        # logging.basicConfig(level=logging.WARNING)
 
-@guicmd.command(cls=make_rst_to_ansi_formatter(doc_url))
+
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
+@click.argument("search_term", type=str, required=True)
+def search_term(search_term: str) -> None:
+    """"""
+    config = Config()
+    chats_json_handler = ChatsJsonHandler(config)
+    matches = chats_json_handler.search_conversations(search_term)
+    for match in matches:
+        print(
+            f"Title: {match['title']}, ID: {match['id']}, "
+            f"Created: {Helpers.format_create_time(match['create_time'])}"
+        )
+
+
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
 def gui() -> None:
     """``chagpt-conversation-finder gui`` opens the GUI."""
     app = QApplication(sys.argv)
@@ -58,18 +68,20 @@ def gui() -> None:
     gui.show()
     sys.exit(app.exec())
 
-@guicmd.command(cls=make_rst_to_ansi_formatter(doc_url))
+
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
 def pretty_print() -> None:
     """``chagpt-conversation-finder pretty-print`` pretty prints the
     conversations.json file to stdout."""
     config = Config()
-#    fn = config.get
+    #    fn = config.get
     chats_json_handler = ChatsJsonHandler(config)
     conversations = chats_json_handler.get_conversations()
     print(json.dumps(conversations, indent=4))
 
-@guicmd.command(cls=make_rst_to_ansi_formatter(doc_url))
-@click.argument('filename', type=str, required=False)
+
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
+@click.argument("filename", type=str, required=False)
 def update_data(filename: str) -> None:
     """``chagpt-conversation-finder update-data`` updates the conversations.json
     data file from a downloaded chat data file in .zip format from OpenAI website.
@@ -87,29 +99,34 @@ def update_data(filename: str) -> None:
     """
     config = Config()
     if filename is None:
-        filename = FileDialog(config).get_conversations_json_path()
+        app = QApplication(sys.argv)
+        filename = FileDialog(app, config).get_conversations_json_path()
         logging.info(f"filename = {filename}")
-        #sys.exit(0)
     Helpers.extract_conversations_json_file(config.get_data_dir(), filename)
     logging.info("Creating search index...")
-    manager = IndexManager(config, init_type="create")
+    IndexManager(config, init_type="create")
     logging.info("Search index created")
 
 
-@guicmd.command(cls=make_rst_to_ansi_formatter(doc_url))
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
 def create_search_index() -> None:
     """``chagpt-conversation-finder create-search-index`` generates a search index
     for the ``conversations.json`` file."""
     config = Config()
-    manager = IndexManager(config, init_type="create")
+    IndexManager(config, init_type="create")
     logging.info("Search index created")
 
-@guicmd.command(cls=make_rst_to_ansi_formatter(doc_url))
+
+@main.command(cls=make_rst_to_ansi_formatter(doc_url))
 def validate_conversations() -> None:
     """``chagpt-conversation-finder validate-conversations`` validates the
     conversations.json file."""
     config = Config()
-    ValidateConversations(config).validate()
+    if ValidateConversations(config).validate():
+        logging.info("All conversations are valid.")
+    else:
+        logging.error("Some conversations are invalid.")
 
-if __name__ == '__main__':
-    guicmd()
+
+if __name__ == "__main__":
+    main()  # pragma: no cover

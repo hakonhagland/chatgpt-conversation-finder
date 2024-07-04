@@ -1,8 +1,9 @@
 import logging
+from typing import Any
 
 from chatgpt_conversation_finder.config import Config
-from chatgpt_conversation_finder.helpers import Helpers
 from chatgpt_conversation_finder.index_manager import IndexManager
+
 
 class QuickSearch:
     """Quick search for conversations based on an inverted index. We need quick search
@@ -34,6 +35,7 @@ class QuickSearch:
         a larger word).
     12. The search results are displayed in the GUI as the user types.
     """
+
     def __init__(self, config: Config, index_manager: IndexManager) -> None:
         self.config = config
         self.index_manager = index_manager
@@ -41,12 +43,13 @@ class QuickSearch:
         self.word_index = self.index_manager.get_word_index()
         self.id_alias = self.index_manager.get_inverse_id_map()
 
-    def search_conversations(self, search_term: str):
+    def search_conversations(self, search_term: str) -> list[dict[str, Any]]:
+        logging.debug(f"Search term: '{search_term}'")
         # TODO: Handle quoted phrases for exact match
         # First, convert to lowercase for case-insensitive search
         search_term = search_term.lower()
         # Check if the last character in the original search_term is a space
-        trailing_space = search_term.endswith(' ')
+        trailing_space = search_term.endswith(" ")
         # Now strip the trailing spaces to clean up the input for processing
         search_term = search_term.strip()
         tokens = search_term.split()
@@ -58,12 +61,16 @@ class QuickSearch:
             prefix_word = tokens.pop()
         if len(tokens) > 0:
             for token in tokens:
-                logging.debug(f"Searching for token: {token}")
                 if token in self.word_index:
-                    logging.debug(f"..Token found in index: {token}")
                     if matching_conversations is None:
-                        matching_conversations = self.word_index[token]
+                        # IMPORTANT: We need to make a copy here,
+                        #    otherwise we will be modifying the original set
+                        matching_conversations = self.word_index[token].copy()
+                        logging.debug(
+                            f"..Number of matching conversations: {len(matching_conversations)}"
+                        )
                     else:
+                        logging.debug(f"..Intersecting with token: {token}")
                         matching_conversations &= self.word_index[token]
                 else:
                     logging.debug(f"..Token not found in index: {token}")
@@ -75,13 +82,15 @@ class QuickSearch:
                 prefix_word, matching_conversations
             )
         elif len(tokens) == 0:
-            logging.debug("Empty search term. Returning all conversations.")
             # If the search term is empty, return all conversations
-            matching_conversations = set(self.id_alias.keys())
+            matching_conversations = set(self.id_alias.keys())  # type: ignore
         results = []
-        logging.debug(f"Number of matching conversations: {len(matching_conversations)}")
-        for conversation_alias in matching_conversations:
-            conversation_id = self.id_alias[conversation_alias]
+        logging.debug(
+            "Number of matching conversations: "
+            f"{len(matching_conversations) if matching_conversations is not None else 0}"
+        )
+        for conversation_alias in matching_conversations:  # type: ignore
+            conversation_id = self.id_alias[int(conversation_alias)]
             conversation_info = self.id_info.get(conversation_id)
             if conversation_info:
                 results.append(conversation_info)
@@ -98,7 +107,7 @@ class QuickSearch:
         prefix_matching_conversations = set()
         conversations = self.index_manager.get_conversations()
         for conversation_alias in matching_conversations:
-            conversation_id = self.id_alias[conversation_alias]
+            conversation_id = self.id_alias[int(conversation_alias)]
             tokens = conversations[conversation_id]
             for token in tokens:
                 if token.startswith(prefix_word):
@@ -106,17 +115,11 @@ class QuickSearch:
                     break
         return prefix_matching_conversations
 
-
     def match_prefix_word(
         self, prefix_word: str, matching_conversations: set[str] | None
     ) -> set[str]:
         """Match a prefix word to the set of matching conversations."""
-        if matching_conversations is None:
-            logging.debug("match_prefix_word(): matching_conversations == None")
-        else:
-            logging.debug(f"match_prefix_word(): len(matching_conversations) = {len(matching_conversations)}")
         max_prefix_length = self.index_manager.get_max_prefix_length()
-        logging.debug(f"match_prefix_word(): max_prefix_length = {max_prefix_length}")
         manual_search = False
         if len(prefix_word) > max_prefix_length:
             manual_prefix_word = prefix_word
@@ -124,7 +127,9 @@ class QuickSearch:
             manual_search = True
         logging.debug(f"match_prefix_word(): manual_search = {manual_search}")
         prefix_matching_conversations = self.index_manager.match_prefix(prefix_word)
-        logging.debug(f"match_prefix_word(): Prefix matching conversations: {len(prefix_matching_conversations)}")
+        logging.debug(
+            f"match_prefix_word(): Prefix matching conversations: {len(prefix_matching_conversations)}"
+        )
         if matching_conversations is None:
             matching_conversations = prefix_matching_conversations
         else:

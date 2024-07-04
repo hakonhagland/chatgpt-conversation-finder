@@ -1,7 +1,6 @@
 import configparser
 import importlib.resources  # access non-code resources
 import logging
-import os
 from configparser import ConfigParser
 from pathlib import Path
 
@@ -39,7 +38,7 @@ class Config:
         if path.exists():
             if path.is_file():
                 raise ConfigException(
-                    f"Config directory {str(path)} is file. Expected directory"
+                    f"Config directory {str(path)} is a file. Expected directory"
                 )
             self.check_correct_config_dir(lock_file)
         else:
@@ -85,13 +84,13 @@ class Config:
         )
 
     def get_config_dir(self) -> Path:
-        return self.config_dir
+        return self.config_dir  # pragma: no cover
 
     def get_conversations_json_path(self) -> Path:
-        return self.datadir_path / self.conversation_json_fn
+        return self.datadir_path / self.conversation_json_fn  # pragma: no cover
 
     def get_data_dir(self) -> Path:
-        return self.datadir_path
+        return self.datadir_path  # pragma: no cover
 
     def get_data_dir_path(self) -> Path:
         data_dir = platformdirs.user_data_dir(appname=self.appname)
@@ -100,7 +99,7 @@ class Config:
         if path.exists():
             if path.is_file():
                 raise ConfigException(
-                    f"Data directory {str(path)} is file. Expected directory"
+                    f"Data directory {str(path)} is a file. Expected directory"
                 )
             self.check_correct_data_dir(lock_file)
         else:
@@ -156,9 +155,9 @@ class Config:
         config.read(str(path))
 
     def setup_nltk(self) -> None:
-        nltk_path = importlib.resources.files("chatgpt_conversation_finder.data").joinpath(
-            "nltk_data"
-        )
+        nltk_path = importlib.resources.files(
+            "chatgpt_conversation_finder.data"
+        ).joinpath("nltk_data")
         nltk.data.path.insert(0, str(nltk_path))
-        #os.environ['NLTK_DATA'] = str(nltk_path)  # This doesn't work because nltk is
+        # os.environ['NLTK_DATA'] = str(nltk_path)  # This doesn't work because nltk is
         #                                          #  already imported at this point

@@ -1,0 +1,513 @@
+[
+    {
+        "title": "Is Hinduism a religion?",
+        "create_time": 1705913697.045966,
+        "update_time": 1705913713.994067,
+        "mapping": {
+          "791ffc6a-4d1c-4aca-bd6a-de6f4621b1c9": {
+            "id": "791ffc6a-4d1c-4aca-bd6a-de6f4621b1c9",
+            "message": {
+              "id": "791ffc6a-4d1c-4aca-bd6a-de6f4621b1c9",
+              "author": {
+                "role": "system",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": null,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  ""
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": true,
+              "weight": 0,
+              "metadata": {
+                "is_visually_hidden_from_conversation": true
+              },
+              "recipient": "all"
+            },
+            "parent": "aaa13df7-3d13-4c91-9b4e-3d83f6d9c482",
+            "children": [
+              "aaa21d1d-760c-4c5c-a9fd-474b93520312"
+            ]
+          },
+          "aaa13df7-3d13-4c91-9b4e-3d83f6d9c482": {
+            "id": "aaa13df7-3d13-4c91-9b4e-3d83f6d9c482",
+            "message": null,
+            "parent": null,
+            "children": [
+              "791ffc6a-4d1c-4aca-bd6a-de6f4621b1c9"
+            ]
+          },
+          "aaa21d1d-760c-4c5c-a9fd-474b93520312": {
+            "id": "aaa21d1d-760c-4c5c-a9fd-474b93520312",
+            "message": {
+              "id": "aaa21d1d-760c-4c5c-a9fd-474b93520312",
+              "author": {
+                "role": "user",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": 1705913697.047726,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  "Hi. Is Hinduism a religion?"
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": null,
+              "weight": 1,
+              "metadata": {
+                "timestamp_": "absolute",
+                "message_type": null
+              },
+              "recipient": "all"
+            },
+            "parent": "791ffc6a-4d1c-4aca-bd6a-de6f4621b1c9",
+            "children": [
+              "6d712f40-fb55-4ab8-9089-45933adf3d3f"
+            ]
+          },
+          "6d712f40-fb55-4ab8-9089-45933adf3d3f": {
+            "id": "6d712f40-fb55-4ab8-9089-45933adf3d3f",
+            "message": {
+              "id": "6d712f40-fb55-4ab8-9089-45933adf3d3f",
+              "author": {
+                "role": "assistant",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": 1705913712.759886,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  "Yes, Hinduism is a religion. It is one of the world's oldest and third largest religions, with over a billion followers. Originating in the Indian subcontinent, Hinduism encompasses a broad range of philosophies, rituals, cultural practices, and spiritual beliefs. Central to Hindu doctrine are concepts like dharma (duty, ethics, righteousness), karma (action, intent, and consequences), moksha (liberation from the cycle of birth and death), and a belief in a multitude of deities, with Brahman being the supreme, unifying force. Hinduism is known for its diversity and does not have a single founder, a single scripture as its source, or a commonly agreed set of teachings, which makes it unique among major religions."
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": true,
+              "weight": 1,
+              "metadata": {
+                "finish_details": {
+                  "type": "stop",
+                  "stop_tokens": [
+                    100260
+                  ]
+                },
+                "gizmo_id": null,
+                "is_complete": true,
+                "message_type": null,
+                "model_slug": "gpt-4",
+                "parent_id": "aaa21d1d-760c-4c5c-a9fd-474b93520312",
+                "timestamp_": "absolute"
+              },
+              "recipient": "all"
+            },
+            "parent": "aaa21d1d-760c-4c5c-a9fd-474b93520312",
+            "children": []
+          }
+        },
+        "moderation_results": [],
+        "current_node": "6d712f40-fb55-4ab8-9089-45933adf3d3f",
+        "plugin_ids": null,
+        "conversation_id": "23670fbe-76a9-46d1-8c0a-52d48fc29d7a",
+        "conversation_template_id": null,
+        "gizmo_id": null,
+        "is_archived": false,
+        "safe_urls": [],
+        "id": "23670fbe-76a9-46d1-8c0a-52d48fc29d7a"
+    },
+    {
+        "title": "pipx vs pip in Python",
+        "create_time": 1703621562.830355,
+        "update_time": 1703621584.215268,
+        "mapping": {
+          "27341681-636d-4f01-b4f0-400b802003d5": {
+            "id": "27341681-636d-4f01-b4f0-400b802003d5",
+            "message": {
+              "id": "27341681-636d-4f01-b4f0-400b802003d5",
+              "author": {
+                "role": "system",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": null,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  ""
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": true,
+              "weight": 0,
+              "metadata": {
+                "is_visually_hidden_from_conversation": true
+              },
+              "recipient": "all"
+            },
+            "parent": "aaa1a950-66d6-421f-bf10-e04267eccfa7",
+            "children": [
+              "aaa2f7f8-c882-4722-ae00-898229ca865c"
+            ]
+          },
+          "aaa1a950-66d6-421f-bf10-e04267eccfa7": {
+            "id": "aaa1a950-66d6-421f-bf10-e04267eccfa7",
+            "message": null,
+            "parent": null,
+            "children": [
+              "27341681-636d-4f01-b4f0-400b802003d5"
+            ]
+          },
+          "aaa2f7f8-c882-4722-ae00-898229ca865c": {
+            "id": "aaa2f7f8-c882-4722-ae00-898229ca865c",
+            "message": {
+              "id": "aaa2f7f8-c882-4722-ae00-898229ca865c",
+              "author": {
+                "role": "user",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": 1703621562.831491,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  "In Python what is the difference between pipx and pip"
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": null,
+              "weight": 1,
+              "metadata": {
+                "timestamp_": "absolute",
+                "message_type": null
+              },
+              "recipient": "all"
+            },
+            "parent": "27341681-636d-4f01-b4f0-400b802003d5",
+            "children": [
+              "2be42a39-8630-478e-adff-97b48aa75b57"
+            ]
+          },
+          "2be42a39-8630-478e-adff-97b48aa75b57": {
+            "id": "2be42a39-8630-478e-adff-97b48aa75b57",
+            "message": {
+              "id": "2be42a39-8630-478e-adff-97b48aa75b57",
+              "author": {
+                "role": "assistant",
+                "name": null,
+                "metadata": {}
+              },
+              "create_time": 1703621583.101756,
+              "update_time": null,
+              "content": {
+                "content_type": "text",
+                "parts": [
+                  "`pipx` and `pip` are both tools used in the Python ecosystem, but they serve different purposes and are used in different contexts.\n\n### `pip`\n- **Purpose**: `pip` is the standard package installer for Python. It is used to install and manage Python packages from the Python Package Index (PyPI) and other package repositories.\n- **Usage**: With `pip`, you can install packages globally (available to all projects) or within a virtual environment (specific to a single project).\n- **Scope**: When you install a package with `pip`, it's typically meant to be used as a library within your Python projects.\n- **Examples**: \n  - `pip install numpy` installs the NumPy package globally or in the currently active virtual environment.\n  - `pip uninstall numpy` removes the NumPy package.\n\n### `pipx`\n- **Purpose**: `pipx` is designed to install and run Python applications in isolated environments. Each application installed via `pipx` gets its own virtual environment, ensuring that dependencies do not conflict with those of other applications or the global Python environment.\n- **Usage**: It's mainly used for Python-based command-line tools and applications that are meant to be run in the command line, rather than imported as libraries in a script.\n- **Scope**: The tools or applications installed with `pipx` are not intended to be used as dependencies in other Python projects.\n- **Examples**: \n  - `pipx install black` installs the Black code formatter in its own isolated environment.\n  - `pipx run pycowsay \"Hello\"` runs the `pycowsay` application without installing it permanently.\n\nIn summary, `pip` is used for managing Python libraries within projects, while `pipx` is geared towards the isolated installation and execution of Python-based command-line tools and applications."
+                ]
+              },
+              "status": "finished_successfully",
+              "end_turn": true,
+              "weight": 1,
+              "metadata": {
+                "finish_details": {
+                  "type": "stop",
+                  "stop_tokens": [
+                    100260
+                  ]
+                },
+                "is_complete": true,
+                "message_type": null,
+                "model_slug": "gpt-4",
+                "parent_id": "aaa2f7f8-c882-4722-ae00-898229ca865c",
+                "timestamp_": "absolute"
+              },
+              "recipient": "all"
+            },
+            "parent": "aaa2f7f8-c882-4722-ae00-898229ca865c",
+            "children": []
+          }
+        },
+        "moderation_results": [],
+        "current_node": "2be42a39-8630-478e-adff-97b48aa75b57",
+        "plugin_ids": null,
+        "conversation_id": "a4b6b72f-8e30-47db-801c-4546f61db6dc",
+        "conversation_template_id": null,
+        "gizmo_id": null,
+        "is_archived": false,
+        "safe_urls": [],
+        "id": "a4b6b72f-8e30-47db-801c-4546f61db6dc"
+    },
+    {
+        "title": "Islam Second Largest Religion",
+        "create_time": 1719921618.859158,
+        "update_time": 1719921622.411609,
+        "mapping": {
+            "0cc8b311-e2d1-473c-90c2-d125e4334288": {
+                "id": "0cc8b311-e2d1-473c-90c2-d125e4334288",
+                "message": {
+                    "id": "0cc8b311-e2d1-473c-90c2-d125e4334288",
+                    "author": {
+                        "role": "system",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": null,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            ""
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": true,
+                    "weight": 0.0,
+                    "metadata": {
+                        "is_visually_hidden_from_conversation": true
+                    },
+                    "recipient": "all"
+                },
+                "parent": "aaa1ae42-0b38-46e4-9875-f7ad17f4a2e2",
+                "children": [
+                    "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb"
+                ]
+            },
+            "aaa1ae42-0b38-46e4-9875-f7ad17f4a2e2": {
+                "id": "aaa1ae42-0b38-46e4-9875-f7ad17f4a2e2",
+                "message": null,
+                "parent": null,
+                "children": [
+                    "0cc8b311-e2d1-473c-90c2-d125e4334288"
+                ]
+            },
+            "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb": {
+                "id": "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb",
+                "message": {
+                    "id": "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb",
+                    "author": {
+                        "role": "user",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": 1719921618.863068,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            "What is the worlds second largest religion?"
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": null,
+                    "weight": 1.0,
+                    "metadata": {
+                        "request_id": "89ce798358c85326-LHR",
+                        "message_source": null,
+                        "timestamp_": "absolute",
+                        "message_type": null
+                    },
+                    "recipient": "all"
+                },
+                "parent": "0cc8b311-e2d1-473c-90c2-d125e4334288",
+                "children": [
+                    "e9c761e8-633c-4d38-9762-55c7a41f77f7"
+                ]
+            },
+            "e9c761e8-633c-4d38-9762-55c7a41f77f7": {
+                "id": "e9c761e8-633c-4d38-9762-55c7a41f77f7",
+                "message": {
+                    "id": "e9c761e8-633c-4d38-9762-55c7a41f77f7",
+                    "author": {
+                        "role": "assistant",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": 1719921621.565346,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            "The world's second-largest religion is Islam. Islam has over 1.9 billion adherents globally, representing about 24% of the world's population. It is predominantly practiced in countries across the Middle East, North Africa, and parts of Asia, with significant communities in many other regions around the world."
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": true,
+                    "weight": 1.0,
+                    "metadata": {
+                        "citations": [],
+                        "gizmo_id": null,
+                        "finish_details": {
+                            "type": "stop",
+                            "stop_tokens": [
+                                200002
+                            ]
+                        },
+                        "is_complete": true,
+                        "message_type": null,
+                        "model_slug": "gpt-4o",
+                        "default_model_slug": "gpt-4o",
+                        "pad": "AAAAA",
+                        "parent_id": "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb",
+                        "request_id": "89ce798358c85326-LHR",
+                        "timestamp_": "absolute"
+                    },
+                    "recipient": "all"
+                },
+                "parent": "aaa2cc8e-ffd8-4e38-b466-e29fc6a2e5fb",
+                "children": []
+            }
+        },
+        "moderation_results": [],
+        "current_node": "e9c761e8-633c-4d38-9762-55c7a41f77f7",
+        "plugin_ids": null,
+        "conversation_id": "32dc859b-ea2a-4965-970a-007aa72403a7",
+        "conversation_template_id": null,
+        "gizmo_id": null,
+        "is_archived": false,
+        "safe_urls": [],
+        "default_model_slug": "gpt-4o",
+        "conversation_origin": null,
+        "id": "32dc859b-ea2a-4965-970a-007aa72403a7"
+    },
+    {
+        "title": "World's Largest Religion",
+        "create_time": 1719921542.223277,
+        "update_time": 1719921548.38122,
+        "mapping": {
+            "49edcb24-141c-4f16-8b99-d23e89f3558f": {
+                "id": "49edcb24-141c-4f16-8b99-d23e89f3558f",
+                "message": {
+                    "id": "49edcb24-141c-4f16-8b99-d23e89f3558f",
+                    "author": {
+                        "role": "system",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": null,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            ""
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": true,
+                    "weight": 0.0,
+                    "metadata": {
+                        "is_visually_hidden_from_conversation": true
+                    },
+                    "recipient": "all"
+                },
+                "parent": "aaa1536d-3f68-4659-8676-f5dab3734d7d",
+                "children": [
+                    "aaa25e9e-d798-4cd7-bb80-c83a3a574f54"
+                ]
+            },
+            "aaa1536d-3f68-4659-8676-f5dab3734d7d": {
+                "id": "aaa1536d-3f68-4659-8676-f5dab3734d7d",
+                "message": null,
+                "parent": null,
+                "children": [
+                    "49edcb24-141c-4f16-8b99-d23e89f3558f"
+                ]
+            },
+            "aaa25e9e-d798-4cd7-bb80-c83a3a574f54": {
+                "id": "aaa25e9e-d798-4cd7-bb80-c83a3a574f54",
+                "message": {
+                    "id": "aaa25e9e-d798-4cd7-bb80-c83a3a574f54",
+                    "author": {
+                        "role": "user",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": 1719921542.2252,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            "What is the worlds largest religion?"
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": null,
+                    "weight": 1.0,
+                    "metadata": {
+                        "request_id": "89ce77a4c90571fb-LHR",
+                        "message_source": null,
+                        "timestamp_": "absolute",
+                        "message_type": null
+                    },
+                    "recipient": "all"
+                },
+                "parent": "49edcb24-141c-4f16-8b99-d23e89f3558f",
+                "children": [
+                    "fb7d29b4-e21c-4f9f-9343-00a7297c34b5"
+                ]
+            },
+            "fb7d29b4-e21c-4f9f-9343-00a7297c34b5": {
+                "id": "fb7d29b4-e21c-4f9f-9343-00a7297c34b5",
+                "message": {
+                    "id": "fb7d29b4-e21c-4f9f-9343-00a7297c34b5",
+                    "author": {
+                        "role": "assistant",
+                        "name": null,
+                        "metadata": {}
+                    },
+                    "create_time": 1719921547.097549,
+                    "update_time": null,
+                    "content": {
+                        "content_type": "text",
+                        "parts": [
+                            "The world's largest religion is Christianity. As of 2023, Christianity has approximately 2.3 billion adherents worldwide, making up about 31% of the global population. The religion is based on the life and teachings of Jesus Christ and has numerous denominations, including Roman Catholicism, Protestantism, and Eastern Orthodoxy. Christianity is practiced widely across the Americas, Europe, Sub-Saharan Africa, and parts of Asia."
+                        ]
+                    },
+                    "status": "finished_successfully",
+                    "end_turn": true,
+                    "weight": 1.0,
+                    "metadata": {
+                        "citations": [],
+                        "gizmo_id": null,
+                        "finish_details": {
+                            "type": "stop",
+                            "stop_tokens": [
+                                200002
+                            ]
+                        },
+                        "is_complete": true,
+                        "message_type": null,
+                        "model_slug": "gpt-4o",
+                        "default_model_slug": "gpt-4o",
+                        "pad": "AAAAAAAAAAAAA",
+                        "parent_id": "aaa25e9e-d798-4cd7-bb80-c83a3a574f54",
+                        "request_id": "89ce77a4c90571fb-LHR",
+                        "timestamp_": "absolute"
+                    },
+                    "recipient": "all"
+                },
+                "parent": "aaa25e9e-d798-4cd7-bb80-c83a3a574f54",
+                "children": []
+            }
+        },
+        "moderation_results": [],
+        "current_node": "fb7d29b4-e21c-4f9f-9343-00a7297c34b5",
+        "plugin_ids": null,
+        "conversation_id": "de640148-3f7f-4c85-ad9d-bcd72c6bd856",
+        "conversation_template_id": null,
+        "gizmo_id": null,
+        "is_archived": false,
+        "safe_urls": [],
+        "default_model_slug": "gpt-4o",
+        "conversation_origin": null,
+        "id": "de640148-3f7f-4c85-ad9d-bcd72c6bd856"
+    }
+]
