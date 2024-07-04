@@ -44,9 +44,11 @@ class FileDialog:
         dialog.selectFile(
             os.path.join(self.folder_path, files[0])
         )  # Select the most recently modified zip file by default
+        logging.info("Calling exec()")
 
         # Show the dialog and get the selected file
         if dialog.exec() == QFileDialog.DialogCode.Accepted:
+            logging.info(f"Selected file x: {dialog.selectedFiles()[0]}")
             return dialog.selectedFiles()[0]
         else:
             print("Cancelled file selection.")
