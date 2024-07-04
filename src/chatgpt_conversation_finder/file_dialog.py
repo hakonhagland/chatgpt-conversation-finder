@@ -49,7 +49,8 @@ class FileDialog:
         if dialog.exec() == QFileDialog.DialogCode.Accepted:
             return dialog.selectedFiles()[0]
         else:
-            print("Cancelled file selection")
+            print("Cancelled file selection.")
+            logging.info("Cancelled file selection. Returning None.")
             return None
 
     def get_conversations_json_path(self) -> str | None:
