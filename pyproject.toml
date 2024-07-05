@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chatgpt-conversation-finder"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Håkon Hægland <hakon.hagland@gmail.com>"]
 readme = "README.md"
@@ -13,6 +13,7 @@ pyqt6 = "^6.6.1"
 platformdirs = "^4.2.0"
 sphinx-click-rst-to-ansi-formatter = "^0.1.0"
 nltk = "^3.8.1"
+colorama = "^0.4.6"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
@@ -30,6 +31,7 @@ rstcheck = {extras = ["sphinx", "toml"], version = "^6.2.0"}
 toml = "^0.10.2"
 pytest-qt = "^4.4.0"
 pytest-xvfb = "^3.0.0"
+types-colorama = "^0.4.15.20240311"
 
 [tool.coverage.run]
 #omit = [".*", "*/site-packages/*"]
