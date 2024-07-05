@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; chatgpt-conversation-finder 0.1 documentation</title>
+  <title>Usage &mdash; chatgpt-conversation-finder 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -18,8 +19,10 @@
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Suggesting changes to the code" href="development.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,10 +45,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">TODO (Further work needed)</a></li>
 </ul>
@@ -64,9 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active">Usage</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/hakonhagland/chatgpt-conversation-finder/blob/main/docs/genindex" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/hakonhagland/chatgpt-conversation-finder/blob/main/docs/usage.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -74,17 +77,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<p>First download your ChatGPT conversations from the OpenAI API:</p>
+<ul class="simple">
+<li><p>Sign in to ChatGPT.</p></li>
+<li><p>In the top right corner of the page click on your profile icon.</p></li>
+<li><p>Click Settings.</p></li>
+<li><p>Click Data Controls menu.</p></li>
+<li><p>Under Export Data click Export.</p></li>
+<li><p>In the confirmation screen click Confirm export.</p></li>
+<li><p>You should receive an email with your data.
+Note: The link in the email expires after 24 hours</p></li>
+<li><p>From the email, click the <cite>“Download data export”</cite> button to download a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file. The file will usually end up in your
+Downloads folder.</p></li>
+</ul>
+<p>Next, run the command <code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">update-data</span></code> with the path to the directory containing the downloaded <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file. Alternatively, you can omit the path and the program
+will present a file dialog for you to select the file. The dialog is by default initialized with the newest <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file in your Downloads folder.</p>
+<p>After the data has been extracted, you can search for conversations using the command <code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">gui</span></code>. This will open a GUI where you can search for conversations by entering a search term in the search bar.</p>
+<p>By clicking on a conversation in the list, it will open in your default browser.</p>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="development.html" class="btn btn-neutral float-right" title="Suggesting changes to the code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
