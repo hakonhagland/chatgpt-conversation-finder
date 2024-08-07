@@ -48,7 +48,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo.html">TODO (Further work needed)</a></li>
 </ul>
@@ -92,10 +95,22 @@ Note: The link in the email expires after 24 hours</p></li>
 <li><p>From the email, click the <cite>“Download data export”</cite> button to download a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file. The file will usually end up in your
 Downloads folder.</p></li>
 </ul>
-<p>Next, run the command <code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">update-data</span></code> with the path to the downloaded <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file. Alternatively, you can omit the path and the program
-will present a file dialog for you to select the file. The dialog is by default initialized with the newest <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file in your Downloads folder.</p>
+<p>Next, run the command <code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">update-data</span></code> with the path to
+the downloaded <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file. Alternatively, you can omit the path and the program
+will present a file dialog for you to select the file.
+The dialog is by default initialized with the newest <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file in your Downloads folder.</p>
 <p>After the data has been extracted, you can search for conversations using the command <code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">gui</span></code>. This will open a GUI where you can search for conversations by entering a search term in the search bar.</p>
 <p>By clicking on a conversation in the list, it will open in your default browser.</p>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This documentation can also be obtained by running
+<code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">--help</span></code> from the terminal window.</p>
+<p>Or, to get help for a specific subcommand, run
+<code class="docutils literal notranslate"><span class="pre">chatgpt-conversation-finder</span> <span class="pre">&lt;subcommand&gt;</span> <span class="pre">--help</span></code>.</p>
+</div>
+</section>
 </section>
 
 
