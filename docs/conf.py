@@ -7,7 +7,12 @@ author = "Håkon Hægland"
 release = "0.1"
 
 sys.path.insert(0, os.path.abspath("../src"))
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.coverage", "sphinx_autodoc_typehints"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.coverage",
+    "sphinx_autodoc_typehints",
+    "sphinx_click",
+]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

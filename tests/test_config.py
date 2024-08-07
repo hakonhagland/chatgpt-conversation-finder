@@ -1,11 +1,14 @@
+import logging
 import re
 from pathlib import Path
 
 import platformdirs
 import pytest
 from pytest_mock.plugin import MockerFixture
+from _pytest.logging import LogCaptureFixture
 
 from chatgpt_conversation_finder.config import Config
+from chatgpt_conversation_finder.constants import GrepColor
 from chatgpt_conversation_finder.exceptions import ConfigException
 from .common import PrepareConfigDir
 
@@ -254,3 +257,26 @@ class TestConfigFile:
         config = Config()
         downloads_dir = config.get_filedialog_default_dir()
         assert downloads_dir == platformdirs.user_downloads_dir()
+
+    def test_get_grep_item(
+        self,
+        mocker: MockerFixture,
+        caplog: LogCaptureFixture,
+        data_dir_path: Path,
+        prepare_config_dir: PrepareConfigDir,
+    ) -> None:
+        caplog.set_level(logging.WARNING)
+        data_dir = data_dir_path
+        config_dir = prepare_config_dir(add_config_ini=True)
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        config = Config()
+        color = config.get_grep_item("noexisting_color", default="red")
+        assert color.value == GrepColor.RED.value
+        assert caplog.records[-1].msg.startswith("Missing 'noexisting_color' in [Grep]")

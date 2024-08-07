@@ -7,6 +7,7 @@ from pathlib import Path
 import nltk
 import platformdirs
 
+from chatgpt_conversation_finder.constants import GrepColor
 from chatgpt_conversation_finder.exceptions import ConfigException
 
 
@@ -116,6 +117,25 @@ class Config:
         if path == "_USER_DOWNLOAD_DIR_":
             path = platformdirs.user_downloads_dir()
         return path
+
+    def get_grep_item(self, item: str, default: str) -> GrepColor:
+        try:
+            color = self.config["Grep"][item]
+        except KeyError:
+            logging.warning(
+                f"Missing '{item}' in [Grep] section of config. Using default color '{default}'."
+            )
+            color = default
+        return GrepColor.from_str(color)
+
+    def get_grep_match_color(self) -> GrepColor:
+        return self.get_grep_item("match_color", default="red")
+
+    def get_grep_match_header_color(self) -> GrepColor:
+        return self.get_grep_item("header_color", default="green")
+
+    def get_grep_match_trailer_color(self) -> GrepColor:
+        return self.get_grep_item("trailer_color", default="blue")
 
     def get_idmap_path(self) -> Path:
         return self.datadir_path / self.idmap_fn

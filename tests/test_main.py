@@ -121,6 +121,74 @@ class TestPrettyPrintCmd:
         )
 
 
+class TestGrepCmd:
+    def test_invoke(
+        self,
+        caplog: LogCaptureFixture,
+        mocker: MockerFixture,
+        data_dir_path: Path,
+        config_dir_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        caplog.set_level(logging.INFO)
+        config_dir = config_dir_path
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        data_dir = data_dir_path
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        runner = CliRunner()
+        term = "Hinduism"
+        args = ["grep", term]
+        with runner.isolated_filesystem(temp_dir=tmp_path):  # type: ignore
+            result = runner.invoke(main.main, args)
+        assert result.stdout.startswith(
+            "\x1b[32m23670fbe-76a9-46d1-8c0a-52d48fc29d7a: Is Hinduism a religion?"
+        )
+
+
+class TestOpen:
+    @pytest.mark.parametrize("open_fail", [False, True])
+    def test_invoke(
+        self,
+        open_fail: bool,
+        caplog: LogCaptureFixture,
+        mocker: MockerFixture,
+        data_dir_path: Path,
+        config_dir_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        caplog.set_level(logging.INFO)
+        config_dir = config_dir_path
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        data_dir = data_dir_path
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        runner = CliRunner()
+        conversation_id = "23670fbe-76a9-46d1-8c0a-52d48fc29d7a"
+        args = ["open", conversation_id]
+        if open_fail:
+            mock = mocker.patch("webbrowser.open", side_effect=Exception("Error"))
+        else:
+            mock = mocker.patch("webbrowser.open")
+        with runner.isolated_filesystem(temp_dir=tmp_path):  # type: ignore
+            runner.invoke(main.main, args)
+        mock.assert_called_once()
+        if open_fail:
+            assert caplog.records[-1].msg.startswith("Error opening conversation")
+        else:
+            assert caplog.records[-1].msg.startswith("Opened conversation with ID")
+
+
 class TestSearchTermCmd:
     def test_help(
         self,

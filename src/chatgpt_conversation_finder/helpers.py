@@ -71,6 +71,22 @@ class Helpers:
         }
 
     @staticmethod
+    def get_conversations_create_time(
+        conversations: list[dict[str, Any]],
+    ) -> dict[str, int]:
+        return {
+            conversation["id"]: conversation.get("create_time", 0)
+            for conversation in conversations
+        }
+
+    @staticmethod
+    def get_conversation_titles(conversations: list[dict[str, Any]]) -> dict[str, str]:
+        return {
+            conversation["id"]: conversation.get("title", "")
+            for conversation in conversations
+        }
+
+    @staticmethod
     def load_json(json_path: str) -> list[dict[str, Any]]:
         with open(json_path, "r") as f:
             return json.load(f)  # type: ignore
