@@ -9,6 +9,7 @@ Welcome to chatgpt-conversation-finder's documentation!
     introduction
     installation
     usage
+    configuration
     Development <development>
     todo
 
