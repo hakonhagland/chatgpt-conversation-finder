@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QApplication
 from chatgpt_conversation_finder.chats_json_handler import ChatsJsonHandler
 from chatgpt_conversation_finder.config import Config
 from chatgpt_conversation_finder.constants import RegexFlags
+from chatgpt_conversation_finder.edit_file import EditFile
 from chatgpt_conversation_finder.file_dialog import FileDialog
 from chatgpt_conversation_finder.grep_handler import GrepConversationsHandler
 from chatgpt_conversation_finder.gui import ChatGPTFinderGUI
@@ -38,11 +39,12 @@ click_command_cls = make_rst_to_ansi_formatter(doc_url, colors=cli_colors)
 @click.option("--verbose", "-v", is_flag=True, help="Show verbose output")
 @click.pass_context
 def main(ctx: click.Context, verbose: bool) -> None:
-    """``chatgpt-conversation-finder`` is a simple Qt app that let's you open a
+    """``chatgpt-conversation-finder`` let's you open a
     ChatGPT conversation in your default web browser. It has the following sub commands:
 
     * ``create-search-index``: generates a search index for the conversations.json file.
     * ``extract-conversations``: extracts conversations from the ``conversations.json`` file.
+    * ``edit-confg``: opens the config.ini file in your default text editor.
     * ``grep``: runs grep on the ``conversations.json`` file for a given regex.
     * ``gui``: opens a GUI for searching conversations. Let's you open a conversation in your default web browser.
     * ``open``: opens a conversation with a given ID in your default web browser.
@@ -58,6 +60,13 @@ def main(ctx: click.Context, verbose: bool) -> None:
     else:
         logging.basicConfig(level=logging.INFO)
         # logging.basicConfig(level=logging.WARNING)
+
+
+@main.command(cls=click_command_cls)
+def edit_config() -> None:
+    """``chatgpt-conversation-finder edit-config`` lets you edit the config file"""
+    config = Config()
+    EditFile(config).edit_config_file()
 
 
 @main.command(cls=click_command_cls)

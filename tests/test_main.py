@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import QApplication, QFileDialog
 from click.testing import CliRunner
 from pytest_mock.plugin import MockerFixture
 
+from chatgpt_conversation_finder.exceptions import ConfigException
 import chatgpt_conversation_finder.main as main
 from .common import PrepareConfigDir, QtBot
 
@@ -187,6 +188,50 @@ class TestOpen:
             assert caplog.records[-1].msg.startswith("Error opening conversation")
         else:
             assert caplog.records[-1].msg.startswith("Opened conversation with ID")
+
+
+class TestEditConfig:
+    @pytest.mark.parametrize("os_name", ["Linux", "Windows", "Darwin", "Unknown"])
+    def test_invoke(
+        self,
+        os_name: str,
+        caplog: LogCaptureFixture,
+        mocker: MockerFixture,
+        data_dir_path: Path,
+        config_dir_path: Path,
+    ) -> None:
+        caplog.set_level(logging.INFO)
+        config_dir = config_dir_path
+        mocker.patch(
+            "platformdirs.user_config_dir",
+            return_value=config_dir,
+        )
+        data_dir = data_dir_path
+        mocker.patch(
+            "platformdirs.user_data_dir",
+            return_value=data_dir,
+        )
+        mocker.patch("platform.system", return_value=os_name)
+        mocker.patch("subprocess.Popen", return_value=None)
+        runner = CliRunner()
+        args = ["edit-config"]
+        if os_name != "Unknown":
+            with runner.isolated_filesystem():
+                runner.invoke(main.main, args)
+            if os_name == "Linux":
+                assert caplog.records[-1].msg.startswith("""Running: gedit""")
+            elif os_name == "Windows":
+                assert caplog.records[-1].msg.startswith("""Running: notepad""")
+            elif os_name == "Darwin":
+                assert caplog.records[-1].msg.startswith(
+                    """Running: open ['-a', 'TextEdit'"""
+                )
+        else:
+            result = runner.invoke(main.main, args)
+            assert isinstance(result.exception, ConfigException)
+            assert (
+                str(result.exception) == "Config exception: Unknown platform: Unknown"
+            )
 
 
 class TestSearchTermCmd:

@@ -29,6 +29,7 @@ repos:
           - nltk==3.8.1
           - pytest-mock==3.12.0
           - types-colorama==0.4.15.20240311
+          - types-click==7.1.8
         args: []
         pass_filenames: false
         entry: mypy src tests
